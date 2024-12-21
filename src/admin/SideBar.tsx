@@ -6,14 +6,14 @@ interface SidebarProps {
 }
 
 function SideBar({ onClick }: SidebarProps) {
-  const [selectedItem, setSelectedItem] = useState<string | null>(null);
+  const [selectedItem, setSelectedItem] = useState<string | null>("Dashboard");
 
   const items = [
     { name: "Dashboard", icon: <FaHome /> },
     { name: "Flights", icon: <FaPlane /> },
     { name: "Airports", icon: <FaMapMarkerAlt /> },
     { name: "Airplanes", icon: <FaRocket /> },
-    { name: "Crew", icon: <FaUsers /> },
+    
   ];
 
   const handleClick = (item: string) => {
@@ -41,6 +41,9 @@ function SideBar({ onClick }: SidebarProps) {
           </li>
         ))}
       </ul>
+      <div className="logout-div">
+      <button className="logout">Logout</button>
+      </div>
     </>
   );
 }

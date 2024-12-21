@@ -6,6 +6,7 @@ import { PiBagSimpleFill } from "react-icons/pi";
 import { FaDotCircle } from "react-icons/fa";
 import { RiPlaneLine } from "react-icons/ri";
 import { FaLocationDot } from "react-icons/fa6";
+import AdminTopbar from "../admin/AdminTopbar";
 
 
 
@@ -34,6 +35,10 @@ function BookingForm() {
         passengerLastName: "",
         passengerEmail: "",
         numberOfSeats: 0,
+        cardId: "",
+        phoneNumber: "",
+        passportId: ""
+       
     });
     const [flight, setFlight] = useState<Flight>();
 
@@ -52,8 +57,8 @@ function BookingForm() {
         apiClient
             .post("/booking-flight", body,{headers})
             .then(() => {
-                alert("Booking successful!");
-                navigate("/success"); 
+                alert("Booking successful! Check your email ");
+                 
             })
             .catch((error) => {
                 console.error("Error during booking:", error);
@@ -78,19 +83,22 @@ function BookingForm() {
 
     return (
         <div className="bookingForm">
+           
             <div className="flightInfo">
-               
+            <div className="bookTopbar">
+            <AdminTopbar title={"BeeFlights"}></AdminTopbar>
+            </div>
 
             <div className="mainDescrition">
                 <div className="dates">
                     <div className="dateDesc">
-                        <h2>10:00 PM</h2>
+                        <h2>{flight?.departureFrom}</h2>
                         <p>{flight?.flight_departure}</p>
                     </div>
-                    <div className="dateDesc">
-                        <h2>10:30 AM</h2>
+                    {/* <div className="dateDesc">
+                        <h2>{flight?.departureFrom}</h2>
                         <p>{flight?.flight_arrival}</p>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="vertical-line">
                     <div className="icon top">
@@ -106,17 +114,17 @@ function BookingForm() {
 
                 <div className="dates">
                     <div className="dateDesc">
-                        <h2>{flight?.departureFrom}</h2>
-                        <p>SeoKarno-hatta International Airport(CGK)</p>
+                        <h2>{flight?.arrivalTo}</h2>
+                        <p>{flight?.flight_arrival}</p>
                     </div>
-                    <div className="landing">
+                    {/* <div className="landing">
                         <p>14 hours 30 minutes</p>
                         <span>Non-transit</span>
-                    </div>
-                    <div className="dateDesc">
+                    </div> */}
+                    {/* <div className="dateDesc">
                         <h2>{flight?.arrivalTo}</h2>
                         <p>SeoKarno-hatta International Airport(CGK)</p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
@@ -157,16 +165,50 @@ function BookingForm() {
                     onChange={handleInputChange}
                 />
                  </div>
+                <div className="inputDiv">
+
+               <label className="labelInput" htmlFor="cardId">Card Id</label>
+                <input
+                    name="cardId"
+                    type="text"
+                    placeholder="Card Id"
+                    value={formData.cardId}
+                    onChange={handleInputChange}
+                />
+                 </div>
+                <div className="inputDiv">
+
+               <label className="labelInput" htmlFor="passportId">Passport Id</label>
+                <input
+                    name="passportId"
+                    type="text"
+                    placeholder="Passport Id"
+                    value={formData.passportId}
+                    onChange={handleInputChange}
+                />
+                 </div>
+                <div className="inputDiv">
+
+               <label className="labelInput" htmlFor="phoneNumber">Phone Number</label>
+                <input
+                    name="phoneNumber"
+                    type="text"
+                    placeholder="Phone Number"
+                    value={formData.phoneNumber}
+                    onChange={handleInputChange}
+                />
+                 </div>
                  <div className="inputDiv">
-                    <label  className="labelInput" htmlFor="numberOfSeats">numberOfSeats</label>
+                <label  className="labelInput" htmlFor="numberOfSeats">Number Of Seats</label>
                 <input
                     name="numberOfSeats"
                     type="number"
-                    placeholder="numberOfSeats"
+                    placeholder="Number Of Seats"
                     value={formData.numberOfSeats}
                     onChange={handleInputChange}
                 />
                 </div>
+                <div></div>
                 <div className="submitBooking" >
                 <button type="button" onClick={handleSubmit}>
                     Submit Booking

@@ -4,7 +4,7 @@ import MainContent from "./MainContent";
 
 
 function AdminHome(){
-  const [selectedItem, setSelectedItem] = useState<string>("");
+  const [selectedItem, setSelectedItem] = useState<string>("Dashboard");
 
   const handleSidebarClick = (item: string) => {
     setSelectedItem(item);

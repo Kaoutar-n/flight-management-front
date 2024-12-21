@@ -8,9 +8,9 @@ interface ILoginModel{
 import apiClient from "../api/apiClient";
 import { Link, useNavigate } from "react-router-dom";
 // import "./LoginCss.css"
-import '../styles/main.css'
+// import '../styles/main.css'
 import { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 function Login(){
   let navigate=useNavigate();
@@ -52,10 +52,11 @@ function Login(){
 return (
     <div className="loginBody">
     <form onSubmit={handleFormSubmit}>
-        <h3>BeeFlights</h3>
+        <h3>Welcome Back</h3>
+        <p>Enter your email and password to access your account</p>
 
-        <label >Username</label>
-        <input type="email" placeholder="Email or Phone" id="email"  value={data.email}
+        <label >Email</label>
+        <input type="email" placeholder="Email" id="email"  value={data.email}
           onChange={handleInputChange}/>
 
         <label >Password</label>
@@ -63,11 +64,11 @@ return (
           onChange={handleInputChange}/>
 
         <button type="submit">Log In</button>
-        <div className="social">
+        {/* <div className="social">
           <div className="go"><i className="fab fa-google"></i>  Google</div>
           <div className="fb"><i className="fab fa-facebook"></i>  Facebook</div>
           
-        </div>
+        </div> */}
         <h4>Don't have an account? register <Link to="/register">here</Link></h4>
         
     </form>

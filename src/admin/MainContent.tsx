@@ -20,8 +20,7 @@ function MainContent({selectedItem}: MainContentProps){
             return <AdminAirport></AdminAirport>;
           case "Airplanes":
             return <AdminAirplanes></AdminAirplanes>;
-          case "Crew":
-            return <AdminCrew></AdminCrew>;
+          
           default:
             return <h1>Please select an item from the sidebar.</h1>;
         }

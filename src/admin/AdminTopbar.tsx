@@ -31,9 +31,10 @@ function AdminTopbar({ title }: AdminTopbarProps){
         navigate("/profile");
         
       };
-      const handleLogoutClick = () => {
-        console.log("Logout clicked");
+      const handleLogout = () => {
         
+        localStorage.removeItem("authToken");
+        navigate("/login");
       };
 
     return (
@@ -54,7 +55,7 @@ function AdminTopbar({ title }: AdminTopbarProps){
           <ul>
             <li onClick={handleProfileClick}><CgProfile />
             Profile</li>
-            <li onClick={handleLogoutClick}><IoLogOutOutline />
+            <li onClick={handleLogout}><IoLogOutOutline />
             Logout</li>
           </ul>
         </div>

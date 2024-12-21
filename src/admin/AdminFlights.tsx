@@ -25,6 +25,11 @@ function AdminFlights(){
       arrivalToId: 0,
       numberOfSeats: 0,
       airplaneId: 0,
+      flightClass: "",
+      flightEscale: "",
+      program: "",
+      bagageCapacity: 0,
+      CabinCapacity: 0
     });
   
     const token = localStorage.getItem('authToken');
@@ -56,10 +61,25 @@ function AdminFlights(){
         console.error('Error deleting flight:', error);
       }
     };
-  
+    const cleanFlightData = (data: typeof newFlight) => {
+      return {
+        ...data,
+        departureTime: data.departureTime.length === 16 ? `${data.departureTime}:00` : data.departureTime,
+        arrivalTime: data.arrivalTime.length === 16 ? `${data.arrivalTime}:00` : data.arrivalTime,
+        basePrice: Number(data.basePrice),
+        departureFromId: Number(data.departureFromId),
+        arrivalToId: Number(data.arrivalToId),
+        numberOfSeats: Number(data.numberOfSeats),
+        airplaneId: Number(data.airplaneId),
+        bagageCapacity: Number(data.bagageCapacity),
+        CabinCapacity: Number(data.CabinCapacity),
+      };
+    };
     const addFlight = async () => {
       try {
-        const response = await apiClient.post('/flights/add-Flight', newFlight, { headers });
+        const cleanedData = cleanFlightData(newFlight);
+
+        const response = await apiClient.post('/flights/add-Flight', cleanedData, { headers });
         setFlights((prevFlights) => [...prevFlights, response.data]);
         setShowModal(false);
         setNewFlight({
@@ -71,7 +91,12 @@ function AdminFlights(){
           departureFromId: 0,
           arrivalToId: 0,
           numberOfSeats: 0,
-          airplaneId: 0
+          airplaneId: 0,
+          flightClass: "",
+          flightEscale: "",
+          program: "",
+          bagageCapacity: 0,
+          CabinCapacity: 0
         });
       } catch (error) {
         console.error('Error adding flight:', error);
@@ -79,10 +104,26 @@ function AdminFlights(){
     };
   
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = e.target;
-      setNewFlight((prev) => ({ ...prev, [name]: value }));
+      const { name, value, type } = e.target;
+    
+      let formattedValue: string | number = value;
+    
+      // Handle datetime-local input
+      if (type === "datetime-local") {
+        formattedValue = value.length === 16 ? `${value}:00` : value; // Ensure ':00' is appended
+      } else if (type === "number") {
+        // Handle number input
+        formattedValue = isNaN(Number(value)) ? 0 : Number(value);
+      }
+    
+      // Update the state
+      setNewFlight((prev) => ({
+        ...prev,
+        [name]: formattedValue,
+      }));
     };
-  
+    
+    
 
     return(
        <div className="airport-table">
@@ -95,70 +136,149 @@ function AdminFlights(){
           <div className="modal-content">
             
             <form className="airplanes-form" onSubmit={(e) => e.preventDefault()}>
-              <input
+              <div className="adminInputs">
+              <label className="labelInput" htmlFor="flightNumber"> flight Number</label>
+              <input 
                 type="text"
                 name="flightNumber"
                 placeholder="Flight Number"
-                value={newFlight.flightNumber}
+                value={newFlight.flightNumber|| ""}
                 onChange={handleInputChange}
                 required
               />
+              </div>
+              <div className="adminInputs">
+              <label className="labelInput" htmlFor="departureTime">Departure Time</label>
               <input
-                type="text"
+                type="datetime-local"
                 name="departureTime"
                 placeholder="departureTime"
-                value={newFlight.departureTime}
+                value={newFlight.departureTime || ""}
                 onChange={handleInputChange}
                 required
               />
+              </div>
+              <div className="adminInputs">
+              <label className="labelInput" htmlFor="arrivalTime">Arrival Time</label>
               <input
-                type="text"
+                type="datetime-local"
                 name="arrivalTime"
                 placeholder="arrivalTime"
-                value={newFlight.arrivalTime}
+                value={newFlight.arrivalTime|| ""}
                 onChange={handleInputChange}
                 required
               />
+              </div>
+              <div className="adminInputs">
+              <label className="labelInput" htmlFor="basePrice">Price</label>
               <input
                 type="number"
                 name="basePrice"
                 placeholder="Flight basePrice"
-                value={newFlight.basePrice}
+                value={newFlight.basePrice || ""}
                 onChange={handleInputChange}
                 required
               />
+              </div>
+              <div className="adminInputs">
+              <label className="labelInput" htmlFor="departureFromId">Departure Airport Id</label>
               <input
                 type="number"
                 name="departureFromId"
                 placeholder="Base departureFromId"
-                value={newFlight.departureFromId}
+                value={newFlight.departureFromId || ""}
                 onChange={handleInputChange}
                 required
               />
+              </div>
+              <div className="adminInputs">
+              <label className="labelInput" htmlFor="arrivalToId">Arrival Airport Id</label>
               <input
                 type="number"
                 name="arrivalToId"
                 placeholder="arrivalToId "
-                value={newFlight.arrivalToId}
+                value={newFlight.arrivalToId || ""}
                 onChange={handleInputChange}
                 required
               />
+              </div>
+              <div className="adminInputs">
+              <label className="labelInput" htmlFor="numberOfSeats">Number Of Seats</label>
               <input
                 type="number"
                 name="numberOfSeats"
                 placeholder="numberOfSeats"
-                value={newFlight.numberOfSeats}
+                value={newFlight.numberOfSeats || ""}
                 onChange={handleInputChange}
                 required
               />
+              </div>
+              <div className="adminInputs">
+              <label className="labelInput" htmlFor="airplaneId">Airplane Id</label>
               <input
                 type="number"
                 name="airplaneId"
                 placeholder="airplaneId"
-                value={newFlight.airplaneId}
+                value={newFlight.airplaneId || ""}
                 onChange={handleInputChange}
                 required
               />
+              </div>
+              <div className="adminInputs">
+              <label className="labelInput" htmlFor="flightClass">Flight Class</label>
+              <input
+                type="text"
+                name="flightClass"
+                placeholder="airplaneId"
+                value={newFlight.flightClass || ""}
+                onChange={handleInputChange}
+                required
+              />
+              </div>
+              <div className="adminInputs">
+              <label className="labelInput" htmlFor="flightEscale">Flight Escale</label>
+              <input
+                type="text"
+                name="flightEscale"
+                placeholder="airplaneId"
+                value={newFlight.flightEscale || ""}
+                onChange={handleInputChange}
+                required
+              />
+              </div>
+              <div className="adminInputs">
+              <label className="labelInput" htmlFor="program">Program</label>
+              <input
+                type="text"
+                name="program"
+                placeholder="airplaneId"
+                value={newFlight.program || ""}
+                onChange={handleInputChange}
+                required
+              />
+              </div>
+              <div className="adminInputs">
+              <label  className="labelInput" htmlFor="bagageCapacity">Bagage Capacity</label>
+              <input
+                type="number"
+                name="bagageCapacity"
+                placeholder="airplaneId"
+                value={newFlight.bagageCapacity || ""}
+                onChange={handleInputChange}
+                required
+              />
+              </div>
+              <div className="adminInputs">
+              <label className="labelInput" htmlFor="CabinCapacity">Cabin Capacity</label>
+              <input
+                type="number"
+                name="CabinCapacity"
+                placeholder="airplaneId"
+                value={newFlight.CabinCapacity || ""}
+                onChange={handleInputChange}
+                required
+              />
+              </div>
               <div></div>
               <div className="buttons-form"><button className="btn-submit" onClick={addFlight}>
                 Add

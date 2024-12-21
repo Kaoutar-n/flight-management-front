@@ -1,29 +1,24 @@
 import { useEffect, useState } from "react";
 import apiClient from "../api/apiClient";
 
-interface Flight {
-  flight_id: number;
-  flightNumber: string;
-  status: string;
-  flight_departure: string;
-  flight_arrival: string;
-  basePrice: number;
-  departureFrom: string;
-  arrivalTo: string;
+interface Airplane {
+  airplane_id: number;
+  model: string;
+  capacity: number;
+  dateFabrication: string;
+  
 }
 
 function AdminAirplanes() {
-  const [flights, setFlights] = useState<Flight[]>([]);
+  const [flights, setFlights] = useState<Airplane[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [newFlight, setNewFlight] = useState({
-    flightNumber: '',
-    status: '',
-    flight_departure: '',
-    flight_arrival: '',
-    basePrice: 0,
-    departureFrom: '',
-    arrivalTo: '',
+   id: 0,
+    model: '',
+    capacity: 0,
+    dateFabrication: ''
+    
   });
 
   const token = localStorage.getItem('authToken');
@@ -34,10 +29,10 @@ function AdminAirplanes() {
   const fetchFlights = async () => {
     setLoading(true);
     try {
-      const response = await apiClient.get('/flights/all-flights', { headers });
+      const response = await apiClient.get('/airplane/all-airplane', { headers });
       setFlights(response.data.list);
     } catch (error) {
-      console.error('Error fetching flights:', error);
+      console.error('Error fetching Airplanes:', error);
     } finally {
       setLoading(false);
     }
@@ -49,8 +44,8 @@ function AdminAirplanes() {
 
   const deleteFlight = async (id: number) => {
     try {
-      await apiClient.delete(`/flight/delete/${id}`);
-      setFlights((prevFlights) => prevFlights.filter((flight) => flight.flight_id !== id));
+      await apiClient.delete(`/airplane/delete/${id}`, { headers });
+      setFlights((prevFlights) => prevFlights.filter((flight) => flight.airplane_id !== id));
     } catch (error) {
       console.error('Error deleting flight:', error);
     }
@@ -58,17 +53,15 @@ function AdminAirplanes() {
 
   const addFlight = async () => {
     try {
-      const response = await apiClient.post('/flight/add-flight', newFlight);
+      const response = await apiClient.post('/airplane/add-airplane', newFlight, { headers });
       setFlights((prevFlights) => [...prevFlights, response.data]);
       setShowModal(false);
       setNewFlight({
-        flightNumber: '',
-        status: '',
-        flight_departure: '',
-        flight_arrival: '',
-        basePrice: 0,
-        departureFrom: '',
-        arrivalTo: '',
+        id: 0,
+        model: '',
+        capacity: 0,
+        dateFabrication: ''
+        
       });
     } catch (error) {
       console.error('Error adding flight:', error);
@@ -82,71 +75,51 @@ function AdminAirplanes() {
 
   return (
     <div className="airport-table">
-      <h1>Flights</h1>
+      <h1>Airplanes</h1>
       <div className="addBtn">
-      <button className="btn-add" onClick={() => setShowModal(true)}>Add Flight</button></div>
+      <button className="btn-add" onClick={() => setShowModal(true)}>Add Airplane</button></div>
       {showModal && (
         <div className="modal">
-            <h3>Add Flight</h3>
+            <h3>Add Airplane</h3>
           <div className="modal-content">
             
             <form className="airplanes-form" onSubmit={(e) => e.preventDefault()}>
+              <div className="adminInputs">
+              <label className="labelInput" htmlFor="model">Model</label>
               <input
                 type="text"
-                name="flightNumber"
-                placeholder="Flight Number"
-                value={newFlight.flightNumber}
+                name="model"
+                placeholder="model"
+                value={newFlight.model}
                 onChange={handleInputChange}
                 required
               />
-              <input
-                type="text"
-                name="status"
-                placeholder="Status"
-                value={newFlight.status}
-                onChange={handleInputChange}
-                required
-              />
-              <input
-                type="datetime-local"
-                name="flight_departure"
-                placeholder="Flight Departure"
-                value={newFlight.flight_departure}
-                onChange={handleInputChange}
-                required
-              />
-              <input
-                type="datetime-local"
-                name="flight_arrival"
-                placeholder="Flight Arrival"
-                value={newFlight.flight_arrival}
-                onChange={handleInputChange}
-                required
-              />
+              </div>
+              <div className="adminInputs">
+              <label className="labelInput" htmlFor="capacity">Capacity</label>
               <input
                 type="number"
-                name="basePrice"
-                placeholder="Base Price"
-                value={newFlight.basePrice}
+                name="capacity"
+                placeholder="capacity"
+                value={newFlight.capacity}
                 onChange={handleInputChange}
                 required
               />
+              </div>
+              <div className="adminInputs">
+              <label className="labelInput" htmlFor="dateFabrication">Fabrication Date</label>
               <input
-                type="text"
-                name="departureFrom"
-                placeholder="Departure From"
-                value={newFlight.departureFrom}
+                type="date"
+                name="dateFabrication"
+                placeholder="Fabrication date"
+                value={newFlight.dateFabrication}
                 onChange={handleInputChange}
                 required
-              />
-              <input
-                type="text"
-                name="arrivalTo"
-                placeholder="Arrival To"
-                value={newFlight.arrivalTo}
-                onChange={handleInputChange}
-                required
-              />
+              /></div>
+             
+              
+            
+             
               <div></div>
               <div className="buttons-form"><button className="btn-submit" onClick={addFlight}>
                 Add
@@ -161,35 +134,29 @@ function AdminAirplanes() {
       )}
 
       {loading ? (
-        <p>Loading flights...</p>
+        <p>Loading Airplanes...</p>
       ) : (
         <table className="table">
           <thead>
             <tr>
-              <th>Flight ID</th>
-              <th>Flight Number</th>
-              <th>Status</th>
-              <th>Departure</th>
-              <th>Arrival</th>
-              <th>Base Price</th>
-              <th>Departure From</th>
-              <th>Arrival To</th>
+              <th>Airplane ID</th>
+              <th>Model</th>
+              <th>Capacity</th>
+              <th>Fabrication Date</th>
+              
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {flights.map((flight) => (
-              <tr key={flight.flight_id}>
-                <td>{flight.flight_id}</td>
-                <td>{flight.flightNumber}</td>
-                <td>{flight.status}</td>
-                <td>{flight.flight_departure}</td>
-                <td>{flight.flight_arrival}</td>
-                <td>{flight.basePrice}</td>
-                <td>{flight.departureFrom}</td>
-                <td>{flight.arrivalTo}</td>
+              <tr key={flight.airplane_id}>
+                <td>{flight.airplane_id}</td>
+                <td>{flight.model}</td>
+                <td>{flight.capacity}</td>
+                <td>{flight.dateFabrication}</td>
+              
                 <td>
-                  <button className="btn-delete" onClick={() => deleteFlight(flight.flight_id)}>
+                  <button className="btn-delete" onClick={() => deleteFlight(flight.airplane_id)}>
                     Delete
                   </button>
                 </td>

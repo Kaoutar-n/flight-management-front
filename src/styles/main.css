@@ -116,7 +116,7 @@ h2 {
 .loginBody {
   height: 100%;
   width: 100%;
-  background-color: var(--PrimaryColor);
+  background: var(--PrimaryColor) !important;
 }
 .loginBody form {
   height: -moz-fit-content;
@@ -130,9 +130,9 @@ h2 {
   border-radius: 10px;
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
-  padding: 50px 35px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 10px rgba(34, 31, 53, 0.6);
+  padding: 30px 25px;
 }
 .loginBody form * {
   font-family: "Poppins", sans-serif;
@@ -141,23 +141,25 @@ h2 {
   border: none;
 }
 .loginBody form h3 {
-  color: var(--PrimaryColor);
+  color: var(--blackColor);
   font-size: 32px;
-  font-weight: 500;
+  font-weight: bold;
   line-height: 42px;
   text-align: center;
+  font-family: "Times New Roman", Times, serif;
 }
 .loginBody form label {
   display: block;
   margin-top: 20px;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--blackColor);
 }
 .loginBody form input {
   display: block;
   height: 50px;
   width: 100%;
-  background-color: var(--secondSecondaryColor);
+  background-color: var(--greyBg);
   border-radius: 10px;
   padding: 0 10px;
   margin-top: 8px;
@@ -174,13 +176,16 @@ h2 {
 .loginBody form button {
   margin-top: 10px;
   width: 100%;
-  background-color: var(--secondSecondaryColor);
-  color: var(--PrimaryColor);
+  background-color: var(--blackColor);
+  color: var(--whiteColor);
   padding: 15px 0;
   font-size: 18px;
   font-weight: 600;
   border-radius: 5px;
   cursor: pointer;
+}
+.loginBody form p {
+  font-size: 13px;
 }
 .loginBody form .social {
   margin-top: 10px;
@@ -190,6 +195,34 @@ h2 {
 }
 .loginBody form a {
   color: var(--PrimaryColor);
+}
+.loginBody form h4 {
+  color: var(--greyText);
+}
+.loginBody .registerFormGrid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
+.loginBody .registerFormGrid h3 {
+  grid-column: span 2;
+  text-align: center;
+}
+.loginBody .registerFormGrid label,
+.loginBody .registerFormGrid input {
+  grid-column: span 1;
+}
+.loginBody .registerFormGrid button {
+  grid-column: span 2;
+}
+.loginBody .registerFormGrid .social {
+  grid-column: span 2;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .navBar {
@@ -355,7 +388,7 @@ h2 {
   font-family: Arial, sans-serif;
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding: 10px;
   background: var(--whiteColor);
   color: var(--blackColor);
 }
@@ -769,70 +802,77 @@ h2 {
   border: none;
   border-radius: 12px;
 }
-.bookingContainer .detailsContainer .partTwo {
-  width: 69%;
+.bookingContainer .detailsContainer .partTwoWrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-left: 10px;
+}
+.bookingContainer .detailsContainer .partTwoWrap .partTwo {
+  width: 100%;
   background: var(--whiteColor);
   border-radius: 12px;
   padding: 1rem;
   height: -moz-fit-content;
   height: fit-content;
+  margin-bottom: 20px;
 }
-.bookingContainer .detailsContainer .partTwo .flightHeader {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .flightHeader {
   padding-right: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.bookingContainer .detailsContainer .partTwo .flightHeader .airline {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .flightHeader .airline {
   display: flex;
   align-items: center;
   gap: 2px;
 }
-.bookingContainer .detailsContainer .partTwo .flightHeader .airline .airlineLogo {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .flightHeader .airline .airlineLogo {
   width: 80px;
   height: 80px;
   border-radius: 50%;
 }
-.bookingContainer .detailsContainer .partTwo .flightHeader .airline .airlineDescription {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .flightHeader .airline .airlineDescription {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
-.bookingContainer .detailsContainer .partTwo .flightHeader .airline .airlineDescription h2 {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .flightHeader .airline .airlineDescription h2 {
   font-size: 16px;
   margin: 0;
   padding: 0;
 }
-.bookingContainer .detailsContainer .partTwo .flightHeader .airline .airlineDescription .flightDetails {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .flightHeader .airline .airlineDescription .flightDetails {
   display: flex;
   gap: 12px;
   align-items: center;
 }
-.bookingContainer .detailsContainer .partTwo .flightHeader .airline .airlineDescription .flightDetails .line {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .flightHeader .airline .airlineDescription .flightDetails .line {
   height: 12px;
   width: 1px;
   background-color: var(--textColor);
 }
-.bookingContainer .detailsContainer .partTwo .flightHeader .breifFiltered {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .flightHeader .breifFiltered {
   width: 35%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.bookingContainer .detailsContainer .partTwo .flightHeader .breifFiltered .filtered {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .flightHeader .breifFiltered .filtered {
   background: var(--secondSecondaryColor);
   border-radius: 24px;
 }
-.bookingContainer .detailsContainer .partTwo .flightHeader .breifFiltered .filtered p {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .flightHeader .breifFiltered .filtered p {
   color: var(--PrimaryColor);
   padding: 0.5rem 1rem 0.5rem 1rem;
 }
-.bookingContainer .detailsContainer .partTwo .flightHeader .breifFiltered .descIcon {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .flightHeader .breifFiltered .descIcon {
   font-size: 30px;
   color: var(--PrimaryColor);
   cursor: pointer;
 }
-.bookingContainer .detailsContainer .partTwo .includes {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .includes {
   color: var(--greyText);
   display: flex;
   justify-content: space-between;
@@ -841,41 +881,42 @@ h2 {
   border-radius: 24px;
   padding: 0.5rem 1rem 0.5rem 1rem;
 }
-.bookingContainer .detailsContainer .partTwo .includes .includesIcons {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .includes .includesIcons {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   width: 15%;
 }
-.bookingContainer .detailsContainer .partTwo .includes .includesIcons .weigts {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .includes .includesIcons .weigts {
   display: flex;
   gap: 4px;
   align-items: center;
   color: var(--blackColor);
 }
-.bookingContainer .detailsContainer .partTwo .includes .includesIcons .weigts p {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .includes .includesIcons .weigts p {
   color: var(--blackColor);
   font-weight: 600;
   font-size: 13px;
 }
-.bookingContainer .detailsContainer .partTwo .mainDescrition {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .mainDescrition {
   padding-top: 1rem;
   display: flex;
   gap: 12px;
+  width: 100%;
 }
-.bookingContainer .detailsContainer .partTwo .mainDescrition .dates {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .mainDescrition .dates {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.bookingContainer .detailsContainer .partTwo .mainDescrition .dates .landing span {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .mainDescrition .dates .landing span {
   color: var(--PrimaryColor);
 }
-.bookingContainer .detailsContainer .partTwo .mainDescrition .dates .dateDesc h2 {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .mainDescrition .dates .dateDesc h2 {
   padding: 0;
   font-size: 16px;
 }
-.bookingContainer .detailsContainer .partTwo .mainDescrition .vertical-line {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .mainDescrition .vertical-line {
   position: relative;
   width: 10px;
   height: 130px;
@@ -884,7 +925,7 @@ h2 {
   flex-direction: column;
   align-items: center;
 }
-.bookingContainer .detailsContainer .partTwo .mainDescrition .vertical-line::before {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .mainDescrition .vertical-line::before {
   content: "";
   position: absolute;
   width: 2px;
@@ -893,50 +934,50 @@ h2 {
   left: 50%;
   transform: translateX(-50%);
 }
-.bookingContainer .detailsContainer .partTwo .mainDescrition .vertical-line .icon {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .mainDescrition .vertical-line .icon {
   position: absolute;
 }
-.bookingContainer .detailsContainer .partTwo .mainDescrition .vertical-line .icon.top {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .mainDescrition .vertical-line .icon.top {
   top: 0;
   transform: translateY(-50%);
 }
-.bookingContainer .detailsContainer .partTwo .mainDescrition .vertical-line .icon.middle {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .mainDescrition .vertical-line .icon.middle {
   top: 50%;
   transform: translateY(-50%);
 }
-.bookingContainer .detailsContainer .partTwo .mainDescrition .vertical-line .icon.middle .i {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .mainDescrition .vertical-line .icon.middle .i {
   transform: rotate(180deg);
 }
-.bookingContainer .detailsContainer .partTwo .mainDescrition .vertical-line .icon.bottom {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .mainDescrition .vertical-line .icon.bottom {
   bottom: 0;
   transform: translateY(50%);
 }
-.bookingContainer .detailsContainer .partTwo .mainDescrition .vertical-line .icon.bottom .i {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .mainDescrition .vertical-line .icon.bottom .i {
   color: var(--PrimaryColor);
 }
-.bookingContainer .detailsContainer .partTwo .mainDescrition .vertical-line .icon .i {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .mainDescrition .vertical-line .icon .i {
   font-size: 20px;
   color: #333;
 }
-.bookingContainer .detailsContainer .partTwo .dashed-line {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .dashed-line {
   margin-top: 10px;
   width: 100%;
   height: 2px;
   background: repeating-linear-gradient(to right, #ccc, #ccc 2px, transparent 4px, transparent 6px);
 }
-.bookingContainer .detailsContainer .partTwo .selectFlight {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .selectFlight {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.bookingContainer .detailsContainer .partTwo .selectFlight .pricing {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .selectFlight .pricing {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   width: 18%;
 }
-.bookingContainer .detailsContainer .partTwo .selectFlight .selectButton .selectBtn {
+.bookingContainer .detailsContainer .partTwoWrap .partTwo .selectFlight .selectButton .selectBtn {
   font-size: 14px;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -990,6 +1031,26 @@ h2 {
   width: 150px;
   height: 150px;
 }
+.adminHome .adminSidebar .logout-div {
+  height: 100%;
+  display: flex;
+  align-items: end;
+  width: 100%;
+  padding: 10px;
+}
+.adminHome .adminSidebar .logout-div .logout {
+  padding: 10px;
+  background: var(--PrimaryColor);
+  color: var(--whiteColor);
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 100%;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
 .adminHome .adminMain {
   width: 85%;
   flex-grow: 1;
@@ -998,7 +1059,6 @@ h2 {
 }
 .adminHome .adminMain .mainContentdiv {
   background: var(--greyBg);
-  padding: 10px;
   border-radius: 24px;
 }
 .adminHome .adminMain .mainContentdiv .airport-table {
@@ -1078,19 +1138,25 @@ h2 {
   flex-direction: column;
   justify-content: space-between;
 }
+.adminHome .adminMain .mainContentdiv .airport-table .modal h3 {
+  color: var(--greyText);
+  padding-left: 30px;
+  padding-right: 30px;
+}
 .adminHome .adminMain .mainContentdiv .airport-table .modal .modal-content {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 10px;
+  padding-bottom: 30px;
   padding-top: 10px;
 }
 .adminHome .adminMain .mainContentdiv .airport-table .modal .modal-content .airplanes-form {
+  padding-left: 30px;
+  padding-right: 30px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
-  max-width: 900px;
+  grid-gap: 30px;
 }
 .adminHome .adminMain .mainContentdiv .airport-table .modal .modal-content .airplanes-form .buttons-form {
   display: flex;
@@ -1109,20 +1175,23 @@ h2 {
   width: 100%;
   justify-content: space-between;
 }
-.adminHome .adminMain .mainContentdiv .airport-table .modal .modal-content form input {
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: 1px solid;
-  background: none;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
+.adminHome .adminMain .mainContentdiv .airport-table .modal .modal-content form .adminInputs {
+  display: flex;
+  flex-direction: column;
+}
+.adminHome .adminMain .mainContentdiv .airport-table .modal .modal-content form .adminInputs input {
+  padding: 10px;
+  border-radius: 12px;
+  border: 0.5px solid;
   outline: none;
 }
-.adminHome .adminMain .mainContentdiv .airport-table .modal .modal-content form input:focus {
+.adminHome .adminMain .mainContentdiv .airport-table .modal .modal-content form .adminInputs input:focus {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   border-color: var(--PrimaryColor);
+}
+.adminHome .adminMain .mainContentdiv .airport-table .modal .modal-content form .adminInputs .labelInput {
+  padding: 10px 0px;
+  font-weight: bold;
 }
 .adminHome .adminMain .mainContentdiv .airport-table .modal .modal-content form .btn-submit {
   color: var(--whiteColor);
@@ -1172,16 +1241,54 @@ h2 {
   padding-left: 10px;
   padding-right: 10px;
 }
+.adminHome .adminMain .dashCharts {
+  padding: 20PX;
+  height: -moz-fit-content;
+  height: fit-content;
+  background: var(--greyBg);
+  border-radius: 20px;
+}
+.adminHome .adminMain .dashCharts .charts {
+  display: flex;
+  flex-direction: column;
+}
+.adminHome .adminMain .dashCharts .charts h3 {
+  color: var(--blackColor);
+}
+.adminHome .adminMain .dashCharts .charts .chartsCouple {
+  display: flex;
+  justify-content: space-between;
+}
+.adminHome .adminMain .dashCharts .charts .chartsCouple .h3Div {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.adminHome .adminMain .dashCharts .charts .sngleChart {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.adminHome .adminMain .dashCharts .charts .sngleChart .h3Div {
+  padding-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
 
 .bookingForm {
-  padding: 20px;
+  padding: 0px;
+  padding-top: 0px;
   width: 100%;
   background: var(--greyBg);
   font-family: "Poppins", sans-serif;
 }
+.bookingForm .bookTopbar {
+  border-radius: 24px;
+}
 .bookingForm form {
   background: var(--whiteColor);
-  padding: 10px;
+  padding: 10px 30px;
   border-radius: 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1224,9 +1331,10 @@ h2 {
   border-radius: 20px;
 }
 .bookingForm .flightInfo .mainDescrition {
-  padding-top: 1rem;
+  padding-left: 1rem;
   display: flex;
   gap: 12px;
+  width: 100%;
 }
 .bookingForm .flightInfo .mainDescrition .dates {
   display: flex;
@@ -1242,44 +1350,38 @@ h2 {
 }
 .bookingForm .flightInfo .mainDescrition .vertical-line {
   position: relative;
-  width: 10px;
-  height: 130px;
+  width: 900px;
+  height: 10px;
   margin: 1rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
 }
 .bookingForm .flightInfo .mainDescrition .vertical-line::before {
   content: "";
   position: absolute;
-  width: 2px;
-  height: 100%;
+  width: 99%;
+  height: 2px;
   background-color: #ccc;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.bookingForm .flightInfo .mainDescrition .vertical-line .icon {
-  position: absolute;
-}
-.bookingForm .flightInfo .mainDescrition .vertical-line .icon.top {
-  top: 0;
-  transform: translateY(-50%);
-}
-.bookingForm .flightInfo .mainDescrition .vertical-line .icon.middle {
   top: 50%;
   transform: translateY(-50%);
 }
-.bookingForm .flightInfo .mainDescrition .vertical-line .icon.middle .i {
-  transform: rotate(180deg);
+.bookingForm .flightInfo .mainDescrition .vertical-line .icon {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
-.bookingForm .flightInfo .mainDescrition .vertical-line .icon.bottom {
-  bottom: 0;
-  transform: translateY(50%);
+.bookingForm .flightInfo .mainDescrition .vertical-line .icon.top .i {
+  color: #000;
+}
+.bookingForm .flightInfo .mainDescrition .vertical-line .icon.middle .i {
+  transform: rotate(90deg);
 }
 .bookingForm .flightInfo .mainDescrition .vertical-line .icon.bottom .i {
   color: var(--PrimaryColor);
 }
 .bookingForm .flightInfo .mainDescrition .vertical-line .icon .i {
-  font-size: 20px;
+  font-size: 25px;
   color: #333;
 }/*# sourceMappingURL=main.css.map */

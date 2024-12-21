@@ -49,50 +49,62 @@ function Register() {
 
   return (
     <div className="loginBody">
-      <form onSubmit={handleFormSubmit}>
-        <h3>Register</h3>
-        <label>First Name</label>
-        <input
-          type="text"
-          placeholder="First name"
-          id="firstname"
-          value={data.firstname}
-          onChange={handleInputChange}
-        />
-           <label>Last Name</label>
-        <input
-          type="text"
-          placeholder="Last name"
-          id="lastname"
-          value={data.lastname}
-          onChange={handleInputChange}
-        />
+      <form onSubmit={handleFormSubmit} className="registerFormGrid">
+  <h3>Register</h3>
 
-        <label>Email</label>
-        <input
-          type="text"
-          placeholder="Email"
-          id="email"
-          value={data.email}
-          onChange={handleInputChange}
-        />
+  <div className="formGroup">
+    <label>First Name</label>
+    <input
+      type="text"
+      placeholder="First name"
+      id="firstname"
+      value={data.firstname}
+      onChange={handleInputChange}
+    />
+  </div>
 
-        <label>Password</label>
-        <input
-          type="password"
-          placeholder="Password"
-          id="password"
-          value={data.password}
-          onChange={handleInputChange}
-        />
+  <div className="formGroup">
+    <label>Last Name</label>
+    <input
+      type="text"
+      placeholder="Last name"
+      id="lastname"
+      value={data.lastname}
+      onChange={handleInputChange}
+    />
+  </div>
 
-        <button >Register</button>
-        <div className="social">
-          {message && <p> {message}</p>}
-          <h4>Already have an account? login <Link to ="/login">here</Link> </h4>
-          
-        </div>
-      </form>
+  <div className="formGroup">
+    <label>Email</label>
+    <input
+      type="text"
+      placeholder="Email"
+      id="email"
+      value={data.email}
+      onChange={handleInputChange}
+    />
+  </div>
+
+  <div className="formGroup">
+    <label>Password</label>
+    <input
+      type="password"
+      placeholder="Password"
+      id="password"
+      value={data.password}
+      onChange={handleInputChange}
+    />
+  </div>
+
+  <button>Register</button>
+  <div className="social">
+    {message && <p>{message}</p>}
+    <h4>
+      Already have an account? Login <Link to="/login">here</Link>
+    </h4>
+  </div>
+</form>
+
       </div>
   );
 }

@@ -90,7 +90,9 @@ function AdminAirport() {
            <h3>Add Airport</h3>
           <div className="modal-content">
            
-            <form onSubmit={(e) => e.preventDefault()}>
+            <form className="airplanes-form"  onSubmit={(e) => e.preventDefault()}>
+              <div className="adminInputs">
+              <label className="labelInput" htmlFor="airportName">Airport Name</label>
               <input
                 type="text"
                 name="airportName"
@@ -99,6 +101,9 @@ function AdminAirport() {
                 onChange={handleInputChange}
                 required
               />
+              </div>
+              <div className="adminInputs">
+              <label className="labelInput" htmlFor="iaatCode">Iaat Code</label>
               <input
                 type="text"
                 name="iaatCode"
@@ -107,6 +112,9 @@ function AdminAirport() {
                 onChange={handleInputChange}
                 required
               />
+              </div>
+              <div className="adminInputs">
+              <label className="labelInput" htmlFor="city">City</label>
               <input
                 type="text"
                 name="city"
@@ -115,6 +123,9 @@ function AdminAirport() {
                 onChange={handleInputChange}
                 required
               />
+              </div>
+              <div className="adminInputs">
+              <label className="labelInput" htmlFor="country">Country</label>
               <input
                 type="text"
                 name="country"
@@ -123,6 +134,9 @@ function AdminAirport() {
                 onChange={handleInputChange}
                 required
               />
+              </div>
+              <div className="buttons-form">
+
               <button className="btn-submit" onClick={addAirport}>
                 Add
               </button>
@@ -132,6 +146,8 @@ function AdminAirport() {
               >
                 Cancel
               </button>
+              </div>
+             
             </form>
           </div>
         </div>

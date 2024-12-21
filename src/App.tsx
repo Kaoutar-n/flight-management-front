@@ -11,6 +11,7 @@ import ProtectedRoute from "./ProtectedRoute ";
 import Booking from "./mainHome/Booking";
 import AdminHome from "./admin/AdminHome";
 import BookingForm from "./mainHome/BookingForm";
+import AdminRoute from "./AdminRoute";
 
 
 
@@ -26,9 +27,14 @@ const isAuthenticated = !!localStorage.getItem("authToken");
        
        
        <Route path="/booking" element={<ProtectedRoute><MainHome/></ProtectedRoute>}></Route>
+
        <Route path="/book-flight" element={<ProtectedRoute><BookingForm/></ProtectedRoute>}></Route>
+       <Route path="/adminhome" element={<AdminRoute><AdminHome/></AdminRoute>}></Route>
+
        {/* <Route path="/adminehome" element={<AdminHome></AdminHome>}></Route> */}
-       <Route path="/adminhome" element={<ProtectedRoute><AdminHome/></ProtectedRoute>}></Route>
+
+       {/* <Route path="/adminhome" element={<ProtectedRoute><AdminHome/></ProtectedRoute>}></Route> */}
+
        
        {/* <Route
           path="/"

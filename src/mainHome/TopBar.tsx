@@ -40,14 +40,17 @@ function TopBar(){
         navigate("/profile");
         
       };
-      const handleLogoutClick = () => {
-        console.log("Logout clicked");
-        
-      };
+      
 
+
+      const handleLogout = () => {
+        
+        localStorage.removeItem("authToken");
+        navigate("/login");
+      };
     return (
         <div className="header">
-      <div className="logo">BeeFlights</div>
+      <div className="logo">Bee Flights</div>
       <div className="menu">
        
         <div
@@ -114,7 +117,7 @@ function TopBar(){
           <ul>
             <li onClick={handleProfileClick}><CgProfile />
             Profile</li>
-            <li onClick={handleLogoutClick}><IoLogOutOutline />
+            <li onClick={handleLogout}><IoLogOutOutline />
             Logout</li>
           </ul>
         </div>
