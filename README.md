@@ -48,7 +48,6 @@ A flight management and booking web application. Customers can search and book f
 
 - **Frontend:** React 18 + Vite + TypeScript
 - **Backend:** Not included in this repository (frontend expects an API)
-- **Database:** Not present / not applicable to this repo
 - **Charts:** Chart.js (via `react-chartjs-2`)
 - **Auth (frontend):** JWT stored in `localStorage` (`authToken`), decoded with `jwt-decode`
 
@@ -58,40 +57,25 @@ Major libraries (from `package.json`): `react`, `react-dom`, `vite`, `typescript
 
 ### Prerequisites
 
-- Node.js: required for the frontend (no `engines` field or explicit Node version found in the repo).
-
-Dev tool versions declared in `package.json` (useful references):
-
+- Node.js
 - `vite` ^5.4.10
 - `typescript` ~5.6.2
 - `@vitejs/plugin-react` ^4.3.3
 
-Note: The repository does not include a backend service, JDK/.NET SDK, or database schema. Exact runtime versions for Node, backend framework, or database are not specified in the codebase.
-
 ### Installation
 
-This repository contains the frontend application. To run the frontend from this repo root (folder name: `flight-management-front`):
-
 ```bash
-git clone https://github.com/<your-username>/<repo-name>.git
+git clone https://github.com/Kaoutar-n/flight-management-front.git
 cd flight-management-front
 npm install
 npm run dev
 ```
 
-- The frontend is a Vite app; the default dev server port is `5173` unless overridden in your environment or Vite config.
+- The frontend is a Vite app;
+  the default dev server port is `5173` unless overridden in your environment or Vite config.
 - The frontend expects a backend API at `http://localhost:8088/api/v1` by default (see [src/api/apiClient.ts](src/api/apiClient.ts#L1-L20)).
 
 If you have a separate backend, start it on port `8088` or update the API base URL in `src/api/apiClient.ts`.
-
-### Configuration
-
-This frontend does not read any environment variables (no `process.env` usages found). The app's network configuration is hard-coded in the API client:
-
-- API base URL: `http://localhost:8088/api/v1` (hard-coded in [src/api/apiClient.ts](src/api/apiClient.ts#L1-L20)).
-- Auth token storage: localStorage key `authToken` (the app sets/reads this key; see `src/login/Login.tsx`).
-
-If you prefer to configure the API URL via environment variables, you must update `src/api/apiClient.ts` to read from an env variable (not implemented in the current code).
 
 ## Project structure
 
@@ -128,23 +112,6 @@ Files of interest:
 
 ## Author
 
-**Kaoutar** — [GitHub](https://github.com/<your-username>) · [LinkedIn](https://linkedin.com/in/<your-profile>)
+**Kaoutar** — [GitHub](https://github.com/Kaoutar-n)
 
 ---
-
-What I couldn't confirm from the repository:
-
-- Backend framework and code (no backend folder present in this repo).
-- Database type, schema or connection details (not present in frontend repo).
-- Exact Node.js runtime version required (no `engines` field).
-- Any mail server, JWT secret, database credentials or other backend environment variables — those are backend responsibilities and are not present here.
-
-Hard-coded values / potential credentials to review:
-
-- API base URL is hard-coded in `src/api/apiClient.ts` as `http://localhost:8088/api/v1`.
-- No plaintext secrets or credentials found in the frontend source.
-
-If you'd like, I can:
-
-- Extract the API base URL into an environment variable and update `src/api/apiClient.ts`.
-- Add a short `backend/README.md` template describing the expected backend endpoints and environment variables.
